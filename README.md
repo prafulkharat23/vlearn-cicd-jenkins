@@ -198,7 +198,7 @@ When triggered, the pipeline will:
 5. Run health checks
 6. Send email notifications
 
-![alt text](images/image-6.png)
+![alt text](images/image-12.png)
 
 ---
 
@@ -206,7 +206,7 @@ When triggered, the pipeline will:
 
 Upon successful or failed build, Jenkins sends an email notification to configured recipients.
 
-![alt text](images/image-11.png)
+![alt text](images/image-13.png)
 
 
 ---
@@ -232,4 +232,4 @@ Upon successful or failed build, Jenkins sends an email notification to configur
 ---
 
 💡 *Author: [Praful kharat](https://github.com/prafulkharat23)*  
-📧 *Contact: yogi9016@gmail.com*    
+📧 *Contact: praful.kharat@gmail.com*    
