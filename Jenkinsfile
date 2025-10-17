@@ -87,11 +87,11 @@ pipeline {
                         set -e
                         cd ${APP_DIR}
 
-                        echo "Stopping and removing old container if exists..."
-                        sudo docker rm -f ${CONTAINER_NAME} || true
+                        #echo "Stopping and removing old container if exists..."
+                        #sudo docker rm -f ${CONTAINER_NAME} || true
 
-                        echo "Running new container..."
-                        sudo docker run -d --name ${CONTAINER_NAME} -p ${APP_PORT}:5000 ${DOCKER_IMAGE}
+                        #echo "Running new container..."
+                        #sudo docker run -d --name ${CONTAINER_NAME} -p ${APP_PORT}:5000 ${DOCKER_IMAGE}
 
                         echo "Copying NGINX config..."
                         sudo cp ${APP_DIR}/nginx.conf /etc/nginx/conf.d/app.conf
