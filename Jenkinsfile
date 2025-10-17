@@ -144,4 +144,3 @@ pipeline {
         }
     }
 }
-#ssh -i "pk-ec2-b12.pem" ubuntu@15.222.236.169
