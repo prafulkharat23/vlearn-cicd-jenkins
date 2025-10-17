@@ -27,18 +27,45 @@ pipeline {
                 echo 'Deploying application to remote server...'
                 sshagent (credentials: ["${SERVER_CREDENTIALS}"]) {
                     sh """
-                    ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} "
+                    ssh -o StrictHostKeyChecking=no ${REMOTE_USER}@${REMOTE_HOST} '
                         set -e
-                        echo 'Checking dependencies...'
-                        for pkg in docker.io nginx git; do
-                            if ! command -v \$pkg &> /dev/null; then
-                                echo '\$pkg not found. Installing...'
-                                sudo apt-get update && sudo apt-get install -y \$pkg
-                            else
-                                echo '\$pkg already installed.'
-                            fi
-                        done
-                    "
+                        echo "Checking and installing dependencies..."
+
+                        # Update package list
+                        sudo apt-get update
+
+                        # Install Docker if not present
+                        if ! command -v docker &> /dev/null; then
+                            echo "Docker not found. Installing docker.io..."
+                            sudo apt-get install -y docker.io
+                            sudo systemctl start docker
+                            sudo systemctl enable docker
+                            sudo usermod -aG docker ubuntu
+                            echo "Docker installed successfully"
+                        else
+                            echo "Docker already installed: \$(docker --version)"
+                        fi
+
+                        # Install Nginx if not present
+                        if ! command -v nginx &> /dev/null; then
+                            echo "Nginx not found. Installing..."
+                            sudo apt-get install -y nginx
+                            echo "Nginx installed successfully"
+                        else
+                            echo "Nginx already installed: \$(nginx -v 2>&1)"
+                        fi
+
+                        # Install Git if not present
+                        if ! command -v git &> /dev/null; then
+                            echo "Git not found. Installing..."
+                            sudo apt-get install -y git
+                            echo "Git installed successfully"
+                        else
+                            echo "Git already installed: \$(git --version)"
+                        fi
+
+                        echo "All dependencies checked/installed successfully"
+                    '
                     """
                 }
             }

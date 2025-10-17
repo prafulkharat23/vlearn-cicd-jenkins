@@ -1,2 +1,2 @@
 https://github.com/prafulkharat23/vlearn-cicd-jenkins.git
-https://github.com/prafulkharat23/vlearn-cicd-gha.git
+https://github.com/prafulkharat23/vlearn-cicd-gha.git                            
